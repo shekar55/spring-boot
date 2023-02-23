@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: shanmukhashan022/springboot
+        image: chandu5562/springboot:latest
         ports:
         - containerPort: 8000
         imagePullPolicy: Always
@@ -24,11 +24,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: my-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: nginx
   ports:
-    - port: 80
-      nodePort: 30007
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
