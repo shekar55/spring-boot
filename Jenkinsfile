@@ -1,7 +1,7 @@
 pipeline {
     agent any 
       tools {
-    	maven "mvn 363"
+    	maven "mvn363"
         gradle "g6.3"
     } 
        
@@ -9,8 +9,8 @@ pipeline {
         
         stage('Clone Repo') {
           steps {
-            sh 'rm -rf spring-boot-api-example'
-            sh 'git clone https://github.com/shanmukhashan022/spring-boot-api-example.git'
+            sh 'rm -rf spring-boot'
+            sh 'git clone https://github.com/shekar55/spring-boot.git'
             }
         }
         
@@ -22,7 +22,7 @@ pipeline {
        
         stage('Build Docker Image') {
             steps {
-              sh 'docker build -t shanmukhashan022/springboot:latest .'
+              sh 'docker build -t chandu5562/springboot:latest .'
               }
         }
         stage('Push Docker image') {
@@ -31,7 +31,7 @@ pipeline {
             }
             steps {
                 sh 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
-                sh    'docker push shanmukhashan022/springboot:latest'
+                sh    'docker push chandu5562/springboot:latest'
             }
         }
           
